@@ -6,38 +6,42 @@ export default function FeaturedProducts() {
   const featured = products.slice(0, 4);
 
   return (
-    <section id="oferta" className="py-24 px-6 bg-white">
+    <section id="oferta" className="py-32 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-12 border-b border-gray-100 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-4 pb-8 border-b border-stone-100">
           <div>
-            <h2 className="text-2xl md:text-3xl font-black tracking-tight">
-              Najnowsze propozycje
-            </h2>
-            <p className="text-sm text-gray-400 mt-1">
-              Świeże projekty z magazynu.
+            <p className="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-3">
+              Z magazynu
             </p>
+            <h2 className="text-4xl md:text-5xl font-semibold text-black tracking-tight">
+              Gotowe projekty
+            </h2>
           </div>
           <Link
             href="/sklep"
-            className="hidden md:block text-sm font-bold text-green-600 hover:text-green-800 transition-colors"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-black border-b border-black pb-1 hover:text-[#27ae60] hover:border-[#27ae60] transition-colors w-fit"
           >
-            Zobacz całość &rarr;
+            Wszystkie produkty
+            <svg
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
-        </div>
-
-        <div className="mt-10 text-center md:hidden">
-          <Link
-            href="/sklep"
-            className="inline-block w-full py-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm font-bold uppercase hover:bg-gray-100 transition-colors"
-          >
-            Zobacz wszystkie produkty
-          </Link>
         </div>
       </div>
     </section>
