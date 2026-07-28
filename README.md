@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zabawne Koszulki — Next.js + WooCommerce
 
-## Getting Started
+Headless sklep oparty o Next.js 16, WordPress, WPGraphQL i WooCommerce. Frontend korzysta
+z danych pod adresem `https://zabawnekoszulki.pl/graphql`.
 
-First, run the development server:
+## Co działa
+
+- strona główna z produktami pobieranymi z WordPressa,
+- katalog, kategorie, wyszukiwanie, ceny, sortowanie i filtry Kolor/Rozmiar,
+- strony produktów prostych i wariantowych,
+- galeria, stany magazynowe, opinie i podobne produkty,
+- sesyjny koszyk WooCommerce dla gościa,
+- kupony, wysyłka i interfejs checkoutu; finalizacja wymaga wtyczki `cd-checkout-graphql`,
+- konto klienta po aktywacji opcjonalnej wtyczki uwierzytelniania,
+- SEO: metadata, Open Graph, JSON-LD, sitemap, robots i feed,
+- obsługa stron WordPress przez trasę catch-all,
+- zgody cookies, zabezpieczony proxy GraphQL i limity żądań.
+
+## Uruchomienie
+
+Wymagany jest Node zgodny z plikiem `.nvmrc`.
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Produkcja:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build:release
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Konfiguracja WordPressa
 
-## Learn More
+Wymagane wtyczki po stronie WordPress:
 
-To learn more about Next.js, take a look at the following resources:
+1. WooCommerce
+2. WPGraphQL
+3. WPGraphQL for WooCommerce (WooGraphQL)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Publiczny odczyt katalogu został sprawdzony na docelowym endpointcie.
+Finalizacja zamówień wymaga instalacji i testu opisanej niżej wtyczki.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Funkcje opcjonalne:
 
-## Deploy on Vercel
+- WPGraphQL JWT Authentication — logowanie i konto klienta,
+- `wp-plugins/cd-order-pay-graphql` — przekierowanie do płatności po utworzeniu zamówienia,
+- `wp-plugins/cd-order-received-graphql` — bezpieczny ekran potwierdzenia zamówienia,
+- `wp-plugins/cd-reset-password-url` — reset hasła kierowany do frontendu,
+- `wp-plugins/cd-synced-patterns` — współdzielone sekcje opisów produktów,
+- `wp-plugins/cd-user-local-pickup` — odbiór osobisty przypisany do klienta.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Finalizacja zamówień:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `wp-plugins/cd-checkout-graphql` — walidacja i ochrona przed powtórzeniami;
+  [instalacja i wymagania](wp-plugins/cd-checkout-graphql/README.md).
+- InPost i Przelewy24 należy zainstalować i skonfigurować osobno w WordPressie;
+  ich źródeł nie ma w tym repo. Kontrakt paczkomatu trzeba dopasować do używanej wtyczki.
+
+Po aktywacji JWT ustaw:
+
+```dotenv
+NEXT_PUBLIC_ACCOUNT_FEATURES_ENABLED=true
+```
+
+Formularz kontaktowy korzysta z Contact Form 7. Jego ID podaj jako
+`WORDPRESS_CONTACT_FORM_ID`.
+
+## Zmienne środowiskowe
+
+Pełna lista znajduje się w `.env.example`. Najważniejsze:
+
+- `WORDPRESS_GRAPHQL_URL` — backend GraphQL,
+- `NEXT_PUBLIC_SITE_URL` — publiczny adres aplikacji Next,
+- `WORDPRESS_CONTACT_FORM_ID` — opcjonalne ID formularza CF7,
+- `NEXT_PUBLIC_ACCOUNT_FEATURES_ENABLED` — funkcje konta zależne od JWT,
+
+## Weryfikacja
+
+```bash
+npm run lint
+npm test
+npm run test:php
+npm run build
+```
+
+Build pobiera aktualne produkty z WordPressa i generuje statyczne strony produktów.
+
+## Kontekst rozwoju
+
+- [Architektura](docs/ARCHITECTURE.md)
+- [Przewodnik rozwoju](docs/DEVELOPMENT.md)
+- [Stan i ograniczenia](docs/PROJECT_STATUS.md)
+- [Plan zmian](docs/CHANGE_PLAN.md)
+- [Weryfikacja i wdrożenie](docs/VALIDATION.md)
+
+`WORDPRESS_BASE_URL` i `WORDPRESS_REST_URL` opcjonalnie nadpisują adresy wyprowadzone
+z `WORDPRESS_GRAPHQL_URL`. `ALLOWED_ORIGINS` rozszerza listę dopuszczonych originów.
+
+## Biblioteka sklepu
+
+Logika katalogu, koszyka i checkoutu oraz hooki React znajdują się w lokalnym
+[pakiecie commerce](packages/commerce/README.md). Aplikacja pozostaje jego pierwszym
+konsumentem; pakiet nie jest jeszcze publikowany w npm.

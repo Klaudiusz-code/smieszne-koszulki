@@ -1,0 +1,40 @@
+query FacetedProducts($first: Int!, $after: String, $taxonomyFilter: [ProductTaxonomyFilterInput], $categoryId: Int, $search: String, $minPrice: Float, $maxPrice: Float, $stockStatus: [StockStatusEnum]) {
+  products(
+    first: $first
+    after: $after
+    where: {
+      orderby: { field: DATE, order: DESC }
+      categoryId: $categoryId
+      status: "publish"
+      visibility: VISIBLE
+      search: $search
+      minPrice: $minPrice
+      maxPrice: $maxPrice
+      stockStatus: $stockStatus
+      taxonomyFilter: { filters: $taxonomyFilter, relation: AND }
+    }
+  ) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      ... on SimpleProduct {
+        productAttributes: attributes {
+          nodes {
+            name
+            options
+          }
+        }
+      }
+      ... on VariableProduct {
+        productAttributes: attributes {
+          nodes {
+            name
+            options
+          }
+        }
+      }
+    }
+  }
+}

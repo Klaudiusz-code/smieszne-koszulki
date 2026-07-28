@@ -1,0 +1,55 @@
+query Products($first: Int!, $after: String, $taxonomyFilter: [ProductTaxonomyFilterInput], $categoryId: Int, $search: String, $minPrice: Float, $maxPrice: Float, $stockStatus: [StockStatusEnum], $orderby: [ProductsOrderbyInput]) {
+  products(
+    first: $first
+    after: $after
+    where: {
+      orderby: $orderby
+      categoryId: $categoryId
+      status: "publish"
+      visibility: VISIBLE
+      search: $search
+      minPrice: $minPrice
+      maxPrice: $maxPrice
+      stockStatus: $stockStatus
+      taxonomyFilter: { filters: $taxonomyFilter, relation: AND }
+    }
+  ) {
+    found
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      __typename
+      id
+      databaseId
+      name
+      slug
+      image {
+        sourceUrl(size: WOOCOMMERCE_THUMBNAIL)
+        altText
+      }
+      ... on SimpleProduct {
+        price
+        regularPrice
+        salePrice
+        onSale
+        stockStatus
+        stockQuantity
+      }
+      ... on VariableProduct {
+        price
+        regularPrice
+        salePrice
+        onSale
+        stockStatus
+        stockQuantity
+      }
+      productCategories {
+        nodes {
+          slug
+        }
+      }
+    }
+  }
+}

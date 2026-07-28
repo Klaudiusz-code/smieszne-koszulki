@@ -1,0 +1,20 @@
+query CustomerDownloadableItemsQuery {
+  customer {
+    downloadableItems(first: 100) {
+      nodes {
+        url
+        name
+        accessExpires
+        downloadsRemaining
+        product {
+          ... on SimpleProduct {
+            name
+          }
+          ... on VariableProduct {
+            name
+          }
+        }
+      }
+    }
+  }
+}

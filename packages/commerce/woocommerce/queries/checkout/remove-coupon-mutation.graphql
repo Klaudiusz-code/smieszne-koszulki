@@ -1,0 +1,13 @@
+mutation RemoveCoupon($codes: [String]!) {
+  removeCoupons(input: { codes: $codes }) {
+    cart {
+      appliedCoupons {
+        code
+        discountAmount(format: FORMATTED)
+      }
+      subtotal(format: FORMATTED)
+      shippingTotal(format: FORMATTED)
+      total(format: FORMATTED)
+    }
+  }
+}

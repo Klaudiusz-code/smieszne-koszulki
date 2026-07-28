@@ -1,0 +1,26 @@
+query CartStatusQuery {
+  cart {
+    contents {
+      nodes {
+        key
+        quantity
+        variation {
+          node {
+            databaseId
+            attributes {
+              nodes {
+                name
+                value
+              }
+            }
+          }
+        }
+        product {
+          node {
+            databaseId
+          }
+        }
+      }
+    }
+  }
+}

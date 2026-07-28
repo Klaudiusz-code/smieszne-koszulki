@@ -1,0 +1,3 @@
+mutation RefreshAuthToken($refreshToken: String!) {
+  refreshJwtAuthToken(input: { jwtRefreshToken: $refreshToken }) { authToken }
+}

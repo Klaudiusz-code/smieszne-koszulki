@@ -2,76 +2,76 @@ import Link from "next/link";
 
 export default function ContactSection() {
   return (
-    <section id="kontakt" className="relative overflow-hidden bg-white py-24 px-6">
+    <section id="kontakt" className="relative overflow-hidden bg-white px-6 py-24">
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-5">
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="mb-16 text-center">
+          <h2 className="mb-5 text-4xl font-black tracking-tight md:text-6xl">
             Masz pomysł na produkt?
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-lg text-gray-500">
             Koszulki, bluzy, kubki i gadżety z własnym tekstem lub grafiką.
           </p>
         </div>
 
-        <div className="bg-gray-900 text-white rounded-3xl p-10 md:p-14 shadow-2xl mb-10 relative overflow-hidden">
+        <div className="relative mb-10 overflow-hidden rounded-3xl bg-gray-900 p-10 text-white shadow-2xl md:p-14">
           <div className="relative z-10 max-w-2xl">
-            <h3 className="text-2xl md:text-4xl font-bold mb-4">
+            <h3 className="mb-4 text-2xl font-bold md:text-4xl">
               Stwórz własny produkt
             </h3>
-            <p className="text-gray-400 mb-8 max-w-lg">
+            <p className="mb-8 max-w-lg text-gray-400">
               Wybierz gotowy wzór albo zaprojektuj coś swojego. Realizujemy
               też nietypowe pomysły.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/sklep"
-                className="inline-flex justify-center px-8 py-3.5 bg-white text-gray-900 font-bold uppercase tracking-widest text-sm rounded-xl hover:bg-gray-100 transition"
+                href="/produkty"
+                className="inline-flex justify-center rounded-xl bg-white px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-gray-900 transition hover:bg-gray-100"
               >
                 Przejdź do sklepu
               </Link>
-              <a
-                href="mailto:kontakt@smiesznekoszulki.pl"
-                className="inline-flex justify-center px-8 py-3.5 border-2 border-gray-700 text-white font-bold uppercase tracking-widest text-sm rounded-xl hover:bg-white hover:text-gray-900 transition"
+              <Link
+                href="/kontakt"
+                className="inline-flex justify-center rounded-xl border-2 border-gray-700 px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-gray-900"
               >
                 Personalizacja
-              </a>
+              </Link>
             </div>
           </div>
-          <div className="absolute -bottom-12 -right-12 w-40 h-40 bg-gray-700 rounded-full opacity-20" />
+          <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-gray-700 opacity-20" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-            <h3 className="text-xl font-bold mb-2">Masz pytanie?</h3>
-            <p className="text-sm text-gray-500 mb-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg">
+            <h3 className="mb-2 text-xl font-bold">Masz pytanie?</h3>
+            <p className="mb-4 text-sm text-gray-500">
               Nie wiesz jaki produkt wybrać albo jak przygotować projekt?
             </p>
-            <a
-              href="mailto:kontakt@smiesznekoszulki.pl"
-              className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black border-b-2 border-transparent hover:border-black pb-0.5 transition"
+            <Link
+              href="/kontakt"
+              className="border-b-2 border-transparent pb-0.5 text-xs font-bold uppercase tracking-widest text-gray-400 transition hover:border-black hover:text-black"
             >
               Skontaktuj się →
-            </a>
+            </Link>
           </div>
-          <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-            <h3 className="text-xl font-bold mb-2">Dla firm i eventów</h3>
-            <p className="text-sm text-gray-500 mb-4">
+          <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg">
+            <h3 className="mb-2 text-xl font-bold">Dla firm i eventów</h3>
+            <p className="mb-4 text-sm text-gray-500">
               Koszulki z logo, gadżety reklamowe, większe zamówienia.
             </p>
-            <a
-              href="mailto:kontakt@smiesznekoszulki.pl"
-              className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-black border-b-2 border-transparent hover:border-black pb-0.5 transition"
+            <Link
+              href="/kontakt"
+              className="border-b-2 border-transparent pb-0.5 text-xs font-bold uppercase tracking-widest text-gray-400 transition hover:border-black hover:text-black"
             >
               Zapytaj o ofertę →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

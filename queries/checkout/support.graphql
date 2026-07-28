@@ -1,0 +1,6 @@
+query CheckoutSupport {
+  mutation: __type(name: "StoreCheckoutInput") { name }
+  result: __type(name: "StoreCheckoutResult") { name }
+  receipt: __type(name: "OrderReceivedData") { name }
+  payment: __type(name: "OrderPaymentRedirectPayload") { name }
+}

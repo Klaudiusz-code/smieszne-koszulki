@@ -24,31 +24,30 @@ const items = [
 
 export default function WhyUsSection() {
   return (
-    <section className="py-24 px-6 bg-stone-50/50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-xs font-medium text-stone-400 uppercase tracking-widest mb-3">
+    <section className="bg-stone-50/50 px-6 py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 text-center">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-stone-400">
             Nasze atuty
           </p>
-          <h2 className="text-3xl font-medium text-stone-900 tracking-tight">
+          <h2 className="text-3xl font-medium tracking-tight text-stone-900">
             Dlaczego warto nam zaufać?
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {items.map(({ title, desc, Icon }) => (
             <div
               key={title}
-              className="bg-white p-8 rounded-2xl transition-shadow duration-300 hover:shadow-md group"
+              className="group rounded-2xl bg-white p-8 transition-shadow duration-300 hover:shadow-md"
             >
-              <div className="w-12 h-12 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center mb-6 text-stone-600 group-hover:bg-stone-900 group-hover:text-white group-hover:border-stone-900 transition-colors duration-300">
-                <Icon className="w-5 h-5" strokeWidth={1.5} />
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-stone-100 bg-stone-50 text-stone-600 transition-colors duration-300 group-hover:border-stone-900 group-hover:bg-stone-900 group-hover:text-white">
+                <Icon className="h-5 w-5" strokeWidth={1.5} />
               </div>
-
-              <h3 className="text-base font-medium text-stone-900 tracking-tight mb-2">
+              <h3 className="mb-2 text-base font-medium tracking-tight text-stone-900">
                 {title}
               </h3>
-              <p className="text-sm text-stone-500 leading-relaxed font-light">
+              <p className="text-sm font-light leading-relaxed text-stone-500">
                 {desc}
               </p>
             </div>

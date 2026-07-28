@@ -1,0 +1,6 @@
+query GetPage($slug: ID!) {
+  page(id: $slug, idType: URI) {
+    title
+    content
+  }
+}

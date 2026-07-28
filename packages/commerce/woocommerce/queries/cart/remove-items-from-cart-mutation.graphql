@@ -1,0 +1,8 @@
+mutation RemoveItemsFromCart($keys: [ID]!) {
+  removeItemsFromCart(input: { keys: $keys }) {
+    cart {
+      subtotal
+      total
+    }
+  }
+}

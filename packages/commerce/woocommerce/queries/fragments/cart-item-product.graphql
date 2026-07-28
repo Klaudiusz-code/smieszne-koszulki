@@ -1,0 +1,45 @@
+fragment CartItemProduct on CartItem {
+  variation {
+    node {
+      databaseId
+      attributes {
+        nodes {
+          name
+          value
+        }
+      }
+    }
+  }
+  product {
+    node {
+      databaseId
+      slug
+      name
+      image {
+        sourceUrl(size: WOOCOMMERCE_GALLERY_THUMBNAIL)
+        altText
+      }
+      productCategories {
+        nodes {
+          databaseId
+        }
+      }
+      ... on VariableProduct {
+        attributes {
+          nodes {
+            name
+            label
+            ... on GlobalProductAttribute {
+              terms {
+                nodes {
+                  slug
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

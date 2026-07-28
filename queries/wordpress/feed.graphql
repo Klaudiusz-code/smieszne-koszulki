@@ -1,0 +1,33 @@
+query FeedPosts {
+    generalSettings {
+      title
+      description
+      language
+    }
+    posts(first: 20) {
+      nodes {
+        databaseId
+        title
+        uri
+        dateGmt
+        modifiedGmt
+        excerpt
+        content
+        author {
+          node {
+            name
+          }
+        }
+        categories {
+          nodes {
+            name
+          }
+        }
+        tags {
+          nodes {
+            name
+          }
+        }
+      }
+    }
+  }

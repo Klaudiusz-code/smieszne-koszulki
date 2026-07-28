@@ -1,0 +1,119 @@
+query GetProduct($id: ID!, $idType: ProductIdTypeEnum!) {
+  product(id: $id, idType: $idType) {
+    __typename
+    databaseId
+    slug
+    name
+    description
+    shortDescription
+    image {
+      sourceUrl(size: _1536X1536)
+      thumbnailUrl: sourceUrl(size: WOOCOMMERCE_GALLERY_THUMBNAIL)
+      lightboxUrl: sourceUrl(size: _2048X2048)
+      altText
+    }
+    galleryImages {
+      nodes {
+        sourceUrl(size: _1536X1536)
+        thumbnailUrl: sourceUrl(size: WOOCOMMERCE_GALLERY_THUMBNAIL)
+        lightboxUrl: sourceUrl(size: _2048X2048)
+        altText
+      }
+    }
+    productCategories {
+      nodes {
+        databaseId
+        name
+        slug
+      }
+    }
+    averageRating
+    reviewCount
+    reviewsAllowed
+    reviews {
+      nodes {
+        author {
+          node {
+            name
+          }
+        }
+        date
+        content
+      }
+    }
+    ... on SimpleProduct {
+      price
+      regularPrice
+      salePrice
+      onSale
+      sku
+      stockStatus
+      stockQuantity
+      allAttributes: attributes {
+        nodes {
+          name
+          label
+          options
+          variation
+          ... on GlobalProductAttribute {
+            terms {
+              nodes {
+                slug
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+    ... on VariableProduct {
+      price
+      regularPrice
+      salePrice
+      onSale
+      sku
+      stockStatus
+      stockQuantity
+      allAttributes: attributes {
+        nodes {
+          name
+          label
+          options
+          variation
+          ... on GlobalProductAttribute {
+            terms {
+              nodes {
+                slug
+                name
+              }
+            }
+          }
+        }
+      }
+      variations {
+        nodes {
+          databaseId
+          name
+          price
+          regularPrice
+          salePrice
+          sku
+          stockStatus
+          stockQuantity
+          attributes {
+            nodes {
+              name
+              value
+            }
+          }
+          image {
+            sourceUrl(size: _1536X1536)
+            thumbnailUrl: sourceUrl(size: WOOCOMMERCE_GALLERY_THUMBNAIL)
+            lightboxUrl: sourceUrl(size: _2048X2048)
+            altText
+          }
+        }
+      }
+    }
+  }
+}

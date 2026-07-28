@@ -24,36 +24,34 @@ const materials = [
 
 export default function MaterialsSection() {
   return (
-    <section className="py-24 px-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-start">
+    <section className="bg-gray-50 px-6 py-24">
+      <div className="mx-auto grid max-w-7xl items-start gap-14 md:grid-cols-2">
         <div>
-          <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">
+          <h2 className="mb-5 text-3xl font-black tracking-tight md:text-4xl">
             Materiały, które naprawdę nosisz
           </h2>
-          <p className="text-gray-500 max-w-md leading-relaxed">
+          <p className="max-w-md leading-relaxed text-gray-500">
             Stawiamy na sprawdzone tkaniny i trwałe nadruki. Bez kompromisów,
             bez tanich zamienników.
           </p>
         </div>
 
-        <div className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100 space-y-5">
-          {materials.map((m, i) => (
+        <div className="space-y-5 rounded-3xl border border-gray-100 bg-white p-8 shadow-sm md:p-10">
+          {materials.map((material, index) => (
             <div
-              key={m.name}
+              key={material.name}
               className={`flex items-start justify-between gap-4 pb-5 ${
-                i < materials.length - 1 ? "border-b border-gray-100" : ""
+                index < materials.length - 1 ? "border-b border-gray-100" : ""
               }`}
             >
               <div>
-                <p className="font-bold text-gray-900">{m.name}</p>
-                <p className="text-sm text-gray-500">{m.desc}</p>
+                <p className="font-bold text-gray-900">{material.name}</p>
+                <p className="text-sm text-gray-500">{material.desc}</p>
               </div>
-              <div className="text-right shrink-0">
-                <p className="text-sm text-gray-600">{m.material}</p>
-                <p
-                  className={`text-xs font-bold ${m.specColor} uppercase tracking-wider`}
-                >
-                  {m.spec}
+              <div className="shrink-0 text-right">
+                <p className="text-sm text-gray-600">{material.material}</p>
+                <p className={`text-xs font-bold uppercase tracking-wider ${material.specColor}`}>
+                  {material.spec}
                 </p>
               </div>
             </div>

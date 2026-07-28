@@ -1,0 +1,29 @@
+query CustomerOrdersQuery {
+  customer {
+    orders(
+      first: 20
+      where: {
+        statuses: [COMPLETED, PROCESSING, ON_HOLD, PENDING, CANCELLED, REFUNDED, FAILED]
+      }
+    ) {
+      nodes {
+        databaseId
+        orderNumber
+        status
+        date
+        total(format: FORMATTED)
+        paymentMethodTitle
+        lineItems {
+          nodes {
+            quantity
+            product {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

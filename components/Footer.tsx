@@ -2,95 +2,64 @@ import Link from "next/link";
 
 const shopLinks = [
   { label: "Koszulki", href: "/kategoria/koszulki" },
-  { label: "Bluzy", href: "/kategoria/bluzy" },
+  { label: "Bluzy", href: "/kategoria/bluza" },
   { label: "Kubki", href: "/kategoria/kubki" },
   { label: "Gadżety", href: "/kategoria/gadzety" },
-  { label: "Wszystkie produkty", href: "/sklep" },
+  { label: "Wszystkie produkty", href: "/produkty" },
 ];
 
 const infoLinks = [
   { label: "Własny nadruk", href: "/wlasny-nadruk" },
-  { label: "FAQ", href: "/#faq" },
   { label: "Kontakt", href: "/kontakt" },
   { label: "Regulamin", href: "/regulamin" },
-  { label: "Polityka prywatności", href: "/prywatnosc" },
+  { label: "Polityka prywatności", href: "/polityka-prywatnosci" },
+  { label: "Zwroty", href: "/zwroty" },
 ];
+
+const socialUrl =
+  "https://smieszne-koszulki.netlify.app/wlasny-nadruk#";
 
 export default function Footer() {
   return (
     <footer className="bg-black text-white">
-      {/* Główny kontent Footera */}
-      <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-          {/* Kolumna 1: Brand */}
+      <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5">
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6">
+            <h2 className="mb-6 text-3xl font-semibold tracking-tight md:text-4xl">
               Śmieszne
               <br />
               <span className="text-[#ddb745]">Koszulki</span>
             </h2>
-            <p className="text-sm text-stone-400 leading-relaxed font-light max-w-sm mb-8">
-              Tworzymy odzież z charakterem w Zamościu. Drukujemy na najwyższej
-              jakości bawełnie i wysyłamy w całą Polskę w 24h.
+            <p className="mb-8 max-w-sm text-sm font-light leading-relaxed text-stone-400">
+              Profesjonalny druk odzieży w Zamościu. Gotowe wzory i projekty
+              własne. Wysyłka w 24h po całej Polsce.
             </p>
-            {/* Social Media */}
             <div className="flex gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-stone-800 flex items-center justify-center text-stone-500 hover:border-[#ddb745] hover:text-[#ddb745] transition-colors"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
+              {["FB", "IG"].map((social) => (
+                <a
+                  key={social}
+                  href={socialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-stone-800 text-[11px] font-bold text-stone-500 transition-colors hover:border-[#ddb745] hover:text-[#ddb745]"
                 >
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                </svg>
-              </a>
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-stone-800 flex items-center justify-center text-stone-500 hover:border-[#ddb745] hover:text-[#ddb745] transition-colors"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.28 8.28 0 005.58 2.16v-3.44a4.85 4.85 0 01-3.77-1.82v-3.21h3.77z" />
-                </svg>
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-stone-800 flex items-center justify-center text-stone-500 hover:border-[#ddb745] hover:text-[#ddb745] transition-colors"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
-              </a>
+                  {social}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Kolumna 2: Sklep */}
           <div className="md:col-span-3 md:pl-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-6">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-widest text-stone-500">
               Sklep
-            </h4>
+            </h3>
             <ul className="space-y-4">
               {shopLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-stone-400 font-light hover:text-white transition-colors"
+                    className="text-sm font-light text-stone-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -99,17 +68,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolumna 3: Informacje */}
           <div className="md:col-span-4 md:pl-8">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-stone-500 mb-6">
+            <h3 className="mb-6 text-xs font-bold uppercase tracking-widest text-stone-500">
               Informacje
-            </h4>
+            </h3>
             <ul className="space-y-4">
               {infoLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-stone-400 font-light hover:text-white transition-colors"
+                    className="text-sm font-light text-stone-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -117,42 +85,42 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* Mail w footerze */}
-            <div className="mt-8 pt-8 border-t border-stone-800/50">
-              <p className="text-xs text-stone-600 uppercase tracking-wider mb-2">
-                Napisz do nas
+            <div className="mt-8 border-t border-stone-800/50 pt-8">
+              <p className="mb-2 text-xs uppercase tracking-wider text-stone-600">
+                Napisz lub zadzwoń
               </p>
-              <a
-                href="mailto:kontakt@smiesznekoszulki.pl"
-                className="text-sm text-[#ddb745] hover:underline"
-              >
-                kontakt@smiesznekoszulki.pl
-              </a>
+              <div className="space-y-2">
+                <a
+                  href="mailto:kontakt@smiesznekoszulki.pl"
+                  className="block text-sm text-[#ddb745] hover:underline"
+                >
+                  kontakt@smiesznekoszulki.pl
+                </a>
+                <a
+                  href="tel:+48123456789"
+                  className="block text-sm text-stone-400 transition-colors hover:text-white"
+                >
+                  +48 123 456 789
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Dolna belka copyright + klaudiuszdev */}
       <div className="border-t border-stone-800/50">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-stone-600 font-light">
-            © {new Date().getFullYear()} Śmieszne Koszulki. Wszelkie prawa
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
+          <p className="text-xs font-light text-stone-600">
+            © {new Date().getFullYear()} Zabawne Koszulki. Wszelkie prawa
             zastrzeżone.
           </p>
-
-          {/* Author Badge */}
           <a
             href="https://klaudiuszdev.pl"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 text-xs text-stone-600 hover:text-white transition-colors"
+            className="text-xs text-stone-600 transition-colors hover:text-[#ddb745]"
           >
-            <span className="w-px h-3 bg-stone-700 group-hover:bg-white transition-colors" />
-            Design & Dev by
-            <span className="font-semibold text-stone-400 group-hover:text-[#ddb745] transition-colors">
-              klaudiuszdev
-            </span>
+            Designed by klaudiuszdev.pl
           </a>
         </div>
       </div>

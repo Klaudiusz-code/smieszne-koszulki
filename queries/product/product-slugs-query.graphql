@@ -1,0 +1,15 @@
+query ProductSlugs($first: Int!, $after: String) {
+  products(
+    first: $first
+    after: $after
+    where: { status: "publish", visibility: VISIBLE }
+  ) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      slug
+    }
+  }
+}

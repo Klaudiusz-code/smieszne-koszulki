@@ -3,43 +3,44 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="relative pt-20 pb-32 md:pt-32 md:pb-40 bg-white overflow-hidden">
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-[#ddb745] rounded-full blur-[200px] opacity-[0.07]" />
+    <section className="relative overflow-hidden bg-white pb-32 pt-20 md:pb-40 md:pt-32">
+      <div className="absolute right-0 top-20 h-[600px] w-[600px] rounded-full bg-[#ddb745] opacity-[0.07] blur-[200px]" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          <div className="lg:col-span-6 space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-stone-50 border border-stone-200/50 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#27ae60] animate-pulse" />
-              <span className="text-xs font-medium text-stone-500 tracking-wide">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+          <div className="space-y-8 lg:col-span-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-stone-200/50 bg-stone-50 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#27ae60]" />
+              <span className="text-xs font-medium tracking-wide text-stone-500">
                 Wysyłka w 24h po akceptacji
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tighter text-black leading-[0.9]">
+            <h1 className="text-5xl font-semibold leading-[0.9] tracking-tighter text-black sm:text-6xl md:text-7xl lg:text-8xl">
               Koszulki
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ddb745] to-[#d4a832]">
+              <span className="bg-gradient-to-r from-[#ddb745] to-[#d4a832] bg-clip-text text-transparent">
                 z jajem.
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-stone-500 max-w-md font-light leading-relaxed -mt-2">
-              Tworzymy nadruki, które przyciągają wzrok. Zaprojektuj z nami coś
-              unikalnego lub wybierz z gotowej bazy.
+            <p className="-mt-2 max-w-md text-lg font-light leading-relaxed text-stone-500 md:text-xl">
+              Tworzymy koszulki z charakterem. Drukujemy Twoje projekty w
+              Zamościu i wysyłamy w całą Polsce.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <div className="flex flex-col gap-4 pt-4 sm:flex-row">
               <Link
-                href="/sklep"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-black text-white font-medium text-sm tracking-wide rounded-full hover:bg-[#27ae60] transition-all duration-300"
+                href="/produkty"
+                className="group inline-flex items-center justify-center rounded-full bg-black px-8 py-4 text-sm font-medium tracking-wide text-white transition-all duration-300 hover:bg-[#27ae60]"
               >
                 Przeglądaj koszulki
                 <svg
-                  className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                  className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -51,35 +52,34 @@ export default function HeroSection() {
               </Link>
               <Link
                 href="/wlasny-nadruk"
-                className="inline-flex justify-center px-8 py-4 border border-stone-300 text-black font-medium text-sm tracking-wide rounded-full hover:border-black transition-all duration-300"
+                className="inline-flex justify-center rounded-full border border-stone-300 px-8 py-4 text-sm font-medium tracking-wide text-black transition-all duration-300 hover:border-black"
               >
                 Własny projekt
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-6 relative h-[400px] md:h-[650px]">
-            <div className="absolute top-0 right-0 w-[90%] h-[85%] rounded-3xl overflow-hidden shadow-2xl shadow-stone-300/50 border border-stone-200/50">
+          <div className="relative h-[400px] md:h-[650px] lg:col-span-6">
+            <div className="absolute right-0 top-0 h-[85%] w-[90%] overflow-hidden rounded-3xl border border-stone-200/50 shadow-2xl shadow-stone-300/50">
               <Image
                 src="/koszulka1.jpg"
                 alt="Koszulka z nadrukiem"
                 fill
                 priority
-                className="object-cover hover:scale-105 transition-transform duration-700"
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(min-width: 1024px) 45vw, 90vw"
               />
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm text-black text-[10px] font-bold tracking-[0.15em] uppercase px-4 py-2 rounded-full">
+              <div className="absolute left-6 top-6 rounded-full bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-black backdrop-blur-sm">
                 Bestseller
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 w-[60%] h-[40%] bg-[#f9f8f6] rounded-2xl -z-10" />
-            <div className="absolute bottom-8 left-8 bg-white p-4 rounded-2xl shadow-lg shadow-stone-200/50 border border-stone-100 z-20">
-              <p className="text-xs text-stone-400 font-medium uppercase tracking-wider">
+            <div className="absolute bottom-0 left-0 -z-10 h-[40%] w-[60%] rounded-2xl bg-[#f9f8f6]" />
+            <div className="absolute bottom-8 left-8 z-20 rounded-2xl border border-stone-100 bg-white p-4 shadow-lg shadow-stone-200/50">
+              <p className="text-xs font-medium uppercase tracking-wider text-stone-400">
                 Ceny od
               </p>
-              <p className="text-2xl font-bold text-black tracking-tight">
-                49 zł
-              </p>
+              <p className="text-2xl font-bold tracking-tight text-black">49 zł</p>
             </div>
           </div>
         </div>

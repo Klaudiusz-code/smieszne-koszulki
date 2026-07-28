@@ -1,0 +1,13 @@
+mutation ApplyCoupon($code: String!) {
+  applyCoupon(input: { code: $code }) {
+    cart {
+      appliedCoupons {
+        code
+        discountAmount(format: FORMATTED)
+      }
+      subtotal(format: FORMATTED)
+      shippingTotal(format: FORMATTED)
+      total(format: FORMATTED)
+    }
+  }
+}

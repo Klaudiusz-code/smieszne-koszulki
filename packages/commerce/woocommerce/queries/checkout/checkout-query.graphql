@@ -1,0 +1,62 @@
+query CheckoutQuery {
+  cart {
+    contents {
+      nodes {
+        key
+        quantity
+        subtotal(format: FORMATTED)
+        total(format: FORMATTED)
+        ...CartItemProduct
+      }
+    }
+    appliedCoupons {
+      code
+      discountAmount(format: FORMATTED)
+    }
+    subtotal(format: FORMATTED)
+    shippingTotal(format: FORMATTED)
+    total(format: FORMATTED)
+    rawTotal: total(format: RAW)
+    availableShippingMethods {
+      rates {
+        id
+        label
+        cost
+        methodId
+      }
+    }
+    chosenShippingMethods
+  }
+  paymentGateways {
+    nodes {
+      id
+      title
+      description
+      icon
+    }
+  }
+  customer {
+    billing {
+      company
+      firstName
+      lastName
+      address1
+      address2
+      city
+      postcode
+      country
+      phone
+      email
+    }
+    shipping {
+      firstName
+      lastName
+      address1
+      address2
+      city
+      postcode
+      country
+      phone
+    }
+  }
+}

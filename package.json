@@ -1,27 +1,50 @@
 {
-  "name": "smieszne-koszulki",
+  "name": "zabawne-koszulki",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "npm run graphql:check && next build",
+    "start": "node build/server.js",
+    "lint": "eslint",
+    "build:release": "npm run build && node scripts/prepare-release.mjs",
+    "test": "node --import ./scripts/test-register.mjs --test --test-isolation=none tests/*.test.mjs",
+    "test:php": "php tests/checkout-plugin.test.php",
+    "graphql:schema": "node scripts/pull-graphql-schema.mjs",
+    "graphql:generate": "node scripts/graphql-codegen.mjs",
+    "graphql:check": "node scripts/graphql-codegen.mjs --check"
   },
   "dependencies": {
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-icons": "^5.5.0"
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "graphql": "^17.0.2",
+    "next": "^16.2.11",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-icons": "^5.5.0",
+    "sanitize-html": "^2.17.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^7.4.1",
+    "@graphql-codegen/typed-document-node": "^7.1.0",
+    "@graphql-codegen/typescript-operations": "^6.1.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.1",
     "eslint": "^9",
-    "eslint-config-next": "16.1.1",
+    "eslint-config-next": "^16.2.11",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "minimatch@3.1.5": {
+      "brace-expansion": "1.1.18"
+    },
+    "minimatch@10.2.5": {
+      "brace-expansion": "5.0.9"
+    },
+    "postcss": "8.5.18",
+    "sharp": "0.35.0"
   }
 }

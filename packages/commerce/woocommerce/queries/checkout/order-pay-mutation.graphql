@@ -1,0 +1,7 @@
+mutation OrderPaymentRedirect($orderId: Int!, $orderKey: String!) {
+  orderPaymentRedirect(input: { orderId: $orderId, orderKey: $orderKey }) {
+    success
+    redirectUrl
+    message
+  }
+}

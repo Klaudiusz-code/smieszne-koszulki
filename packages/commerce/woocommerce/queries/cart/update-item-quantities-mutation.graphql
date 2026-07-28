@@ -1,0 +1,7 @@
+mutation UpdateItemQuantities($key: ID!, $quantity: Int!) {
+  updateItemQuantities(input: { items: [{ key: $key, quantity: $quantity }] }) {
+    cart {
+      subtotal
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@zabawne/commerce",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./http": "./http/index.ts",
+    "./core": "./core/index.ts",
+    "./woocommerce": "./woocommerce/index.ts",
+    "./woocommerce/documents": "./woocommerce/documents.ts",
+    "./react": "./react/index.ts"
+  },
+  "peerDependencies": {
+    "react": ">=19 <20",
+    "graphql": "^17.0.2"
+  },
+  "dependencies": {
+    "@graphql-typed-document-node/core": "^3.2.0"
+  }
+}

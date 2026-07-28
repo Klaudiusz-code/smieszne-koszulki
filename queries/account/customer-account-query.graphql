@@ -1,0 +1,9 @@
+query CustomerAccountQuery {
+  customer {
+    firstName
+    lastName
+    displayName
+    email
+    username
+  }
+}
