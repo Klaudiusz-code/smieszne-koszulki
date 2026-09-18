@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "wp-plugins/**",
+    "packages/commerce/woocommerce/generated.ts",
+    "lib/server/wordpress/generated.ts",
   ]),
 ]);
 

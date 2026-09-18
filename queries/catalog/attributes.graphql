@@ -1,0 +1,4 @@
+query CatalogAttributes {
+  allPaColor(first: 100) { nodes { name slug count } }
+  allPaSize(first: 100) { nodes { name slug count } }
+}

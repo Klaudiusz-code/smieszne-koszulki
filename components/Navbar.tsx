@@ -1,47 +1,79 @@
 "use client";
+
+import { ACCOUNT_FEATURES_ENABLED } from "@/lib/features";
+
 import { useState } from "react";
 import Link from "next/link";
-import { useCart } from "@/lib/CartContext";
+import { usePathname } from "next/navigation";
+import { useAccountModal } from "@/contexts/account-modal/useAccountModal";
+import { useAuthState } from "@/contexts/auth-state/useAuthState";
+import { useCartCount } from "@/contexts/cart-count/useCartCount";
+import { UserIcon } from "@/components/icons/UserIcon";
 import Logo from "./Logo";
 
 const links = [
-  { href: "/sklep", label: "Sklep" },
+  { href: "/produkty", label: "Sklep" },
   { href: "/wlasny-nadruk", label: "Własny nadruk" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { totalItems } = useCart();
+  const pathname = usePathname();
+  const { cartCount } = useCartCount();
+  const { loggedIn } = useAuthState();
+  const { openAccountModal } = useAccountModal();
 
   return (
-    <nav className="sticky top-4 z-50 mx-4 md:mx-8 mt-4">
-      <div className="max-w-7xl mx-auto bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-black/[0.03] border border-stone-200/50 px-6 h-16 flex items-center justify-between">
+    <nav className="mx-4 md:mx-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between rounded-2xl border border-stone-200/50 bg-white/80 px-6 shadow-lg shadow-black/[0.03] backdrop-blur-xl">
         <Logo />
 
-        <div className="hidden md:flex items-center gap-8 text-[13px] font-medium uppercase tracking-wider text-stone-500">
-          {links.map((l) => (
+        <div className="hidden items-center gap-8 text-[13px] font-medium uppercase tracking-wider text-stone-500 md:flex">
+          {links.map((link) => (
             <Link
-              key={l.href}
-              href={l.href}
-              className="hover:text-black transition-colors duration-200"
+              key={link.href}
+              href={link.href}
+              className={`transition-colors duration-200 hover:text-black ${
+                pathname === link.href ? "text-black" : ""
+              }`}
             >
-              {l.label}
+              {link.label}
             </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-2">
+          {ACCOUNT_FEATURES_ENABLED && (loggedIn ? (
+            <Link
+              href="/konto"
+              className="flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:bg-stone-100"
+              aria-label="Moje konto"
+            >
+              <UserIcon className="h-5 w-5 text-black" />
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={openAccountModal}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl transition-colors hover:bg-stone-100"
+              aria-label="Zaloguj się"
+            >
+              <UserIcon className="h-5 w-5 text-black" />
+            </button>
+          ))}
+
           <Link
             href="/koszyk"
-            className="relative w-10 h-10 flex items-center justify-center hover:bg-stone-100 rounded-xl transition-colors"
-            aria-label="Koszyk"
+            className="relative flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:bg-stone-100"
+            aria-label={`Koszyk, liczba produktów: ${cartCount}`}
           >
             <svg
-              className="w-5 h-5 text-black"
+              className="h-5 w-5 text-black"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -50,27 +82,35 @@ export default function Navbar() {
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               />
             </svg>
-            {totalItems > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#27ae60] text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
-                {totalItems}
+            {cartCount > 0 ? (
+              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#27ae60] px-1 text-[10px] font-bold text-white">
+                {cartCount > 99 ? "99+" : cartCount}
               </span>
-            )}
+            ) : null}
           </Link>
 
           <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden w-10 h-10 flex items-center justify-center hover:bg-stone-100 rounded-xl transition-colors"
+            type="button"
+            onClick={() => setOpen((current) => !current)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:bg-stone-100 md:hidden"
             aria-label="Menu"
+            aria-expanded={open}
           >
             <div className="space-y-1.5">
               <span
-                className={`block w-5 h-0.5 bg-black transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`}
+                className={`block h-0.5 w-5 bg-black transition-all duration-300 ${
+                  open ? "translate-y-2 rotate-45" : ""
+                }`}
               />
               <span
-                className={`block w-5 h-0.5 bg-black transition-all duration-300 ${open ? "opacity-0 scale-0" : ""}`}
+                className={`block h-0.5 w-5 bg-black transition-all duration-300 ${
+                  open ? "scale-0 opacity-0" : ""
+                }`}
               />
               <span
-                className={`block w-5 h-0.5 bg-black transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`}
+                className={`block h-0.5 w-5 bg-black transition-all duration-300 ${
+                  open ? "-translate-y-2 -rotate-45" : ""
+                }`}
               />
             </div>
           </button>
@@ -78,17 +118,19 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out bg-white/90 backdrop-blur-xl rounded-b-2xl border-x border-b border-stone-200/50 ${open ? "max-h-64 opacity-100 mt-2" : "max-h-0 opacity-0"}`}
+        className={`overflow-hidden rounded-b-2xl border-x border-b border-stone-200/50 bg-white/90 backdrop-blur-xl transition-all duration-500 ease-in-out md:hidden ${
+          open ? "mt-2 max-h-64 opacity-100" : "max-h-0 opacity-0"
+        }`}
       >
-        <div className="px-6 py-6 space-y-4">
-          {links.map((l) => (
+        <div className="space-y-4 px-6 py-6">
+          {links.map((link) => (
             <Link
-              key={l.href}
-              href={l.href}
+              key={link.href}
+              href={link.href}
               onClick={() => setOpen(false)}
-              className="block text-sm font-medium text-stone-600 hover:text-black transition-colors"
+              className="block text-sm font-medium text-stone-600 transition-colors hover:text-black"
             >
-              {l.label}
+              {link.label}
             </Link>
           ))}
         </div>

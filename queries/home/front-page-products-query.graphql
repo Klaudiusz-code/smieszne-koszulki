@@ -1,0 +1,43 @@
+query GetFrontPageProducts {
+  products(
+    first: 12
+    where: {
+      orderby: { field: DATE, order: DESC }
+      status: "publish"
+      visibility: VISIBLE
+    }
+  ) {
+    nodes {
+      __typename
+      id
+      databaseId
+      name
+      slug
+      image {
+        sourceUrl(size: WOOCOMMERCE_THUMBNAIL)
+        altText
+      }
+      ... on SimpleProduct {
+        price
+        regularPrice
+        salePrice
+        onSale
+        stockStatus
+        stockQuantity
+      }
+      ... on VariableProduct {
+        price
+        regularPrice
+        salePrice
+        onSale
+        stockStatus
+        stockQuantity
+      }
+      productCategories {
+        nodes {
+          slug
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query CartCountQuery {
+  cart {
+    contents {
+      nodes {
+        quantity
+      }
+    }
+  }
+}

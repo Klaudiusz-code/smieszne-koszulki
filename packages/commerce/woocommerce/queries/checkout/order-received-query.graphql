@@ -1,0 +1,18 @@
+query GetOrderReceived($orderId: Int!, $orderKey: String!) {
+  orderByKey(orderId: $orderId, orderKey: $orderKey) {
+    databaseId
+    orderNumber
+    status
+    date
+    subtotal
+    shippingTotal
+    total
+    paymentMethodTitle
+    shippingMethodTitle
+    needsPayment
+    lineItems {
+      name
+      quantity
+    }
+  }
+}

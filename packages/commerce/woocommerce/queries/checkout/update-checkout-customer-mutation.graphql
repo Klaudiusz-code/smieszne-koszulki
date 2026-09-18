@@ -1,0 +1,28 @@
+mutation UpdateCustomer($input: UpdateCustomerInput!) {
+  updateCustomer(input: $input) {
+    customer {
+      billing {
+        company
+        firstName
+        lastName
+        address1
+        address2
+        city
+        postcode
+        country
+        phone
+        email
+      }
+      shipping {
+        firstName
+        lastName
+        address1
+        address2
+        city
+        postcode
+        country
+        phone
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+query AllProductsWithDescriptionsAndCategories($first: Int!, $after: String) {
+  products(
+    first: $first
+    after: $after
+    where: {
+      orderby: { field: DATE, order: DESC }
+      status: "publish"
+      visibility: VISIBLE
+    }
+  ) {
+    found
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    nodes {
+      id
+      databaseId
+      name
+      slug
+      description
+      shortDescription
+      productCategories {
+        nodes {
+          databaseId
+          name
+          slug
+        }
+      }
+    }
+  }
+}

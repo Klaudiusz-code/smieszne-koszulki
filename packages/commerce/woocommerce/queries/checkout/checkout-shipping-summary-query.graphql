@@ -1,0 +1,27 @@
+query CheckoutShippingQuery {
+  cart {
+    appliedCoupons {
+      code
+      discountAmount(format: FORMATTED)
+    }
+    shippingTotal(format: FORMATTED)
+    total(format: FORMATTED)
+    availableShippingMethods {
+      rates {
+        id
+        label
+        cost
+        methodId
+      }
+    }
+    chosenShippingMethods
+  }
+  paymentGateways {
+    nodes {
+      id
+      title
+      description
+      icon
+    }
+  }
+}

@@ -1,0 +1,15 @@
+mutation WriteReview($input: WriteReviewInput!) {
+  writeReview(input: $input) {
+    rating
+    review {
+      author {
+        node {
+          name
+        }
+      }
+      date
+      content
+      status
+    }
+  }
+}

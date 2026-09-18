@@ -1,0 +1,14 @@
+query CartQuery {
+  cart {
+    contents {
+      nodes {
+        key
+        quantity
+        subtotal
+        total
+        ...CartItemProduct
+      }
+    }
+    subtotal
+  }
+}
